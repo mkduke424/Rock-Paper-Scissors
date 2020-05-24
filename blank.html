@@ -30,15 +30,40 @@
                     default:
                         return ('You lose! ' + computerSelection + ' beats ' + playerSelction);
                }
-
             }
-             
+
+               function game() {
+                   let userTally = 0;
+                   let compTally = 0;
+                   let result;
+                   for(let i = 0; i < 5; i++){
+                    let playerChoice = prompt("Choose Rock, Paper, or Scissors").toUpperCase();
+                    let computerChoice = computerPlay();
+                        result = playRound(playerChoice, computerChoice);
+                       if (result.search('win') >= 0){
+                       userTally ++;
+                        }
+                       else if (result.search('TIE') >= 0){
+                        compTally ++;
+                        userTally++;
+                       }
+                       else{
+                        compTally++;
+                       }
+                   }
+                  return gameWinner(userTally,compTally);
+               }
+
+               function gameWinner(player1,player2) {
+                return (player1 > player2) ? 'You WON!! Your score: ' + player1 +  ' Computer score: '+ player2  : 
+                  (player1 == player2) ? 'TIE!! Your score: ' + player1 + ' Computer score: ' + player2 : 
+                  'You Lose!! Your score: ' + player1 + ' Computer score: ' + player2;
+               }            
             
-            const playerChoice = prompt("Choose Rock, Paper, or Scissors").toUpperCase();
-            const computerChoice = computerPlay();
+           
 
 
-            console.log(playRound(playerChoice,computerChoice));
+            console.log(game());
             
 
 
