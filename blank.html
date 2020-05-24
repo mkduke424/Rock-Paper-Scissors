@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Rock Paper Scissors</title>
+    </head>
+
+    <body>
+        <script>
+            function computerPlay() {
+                let computerArray = ['ROCK' , 'PAPER', 'SCISSORS'];
+                return computerArray[Math.floor(Math.random() * computerArray.length)];
+            }
+
+            function playRound(playerSelction,computerSelection) {
+               
+               switch (true) {
+                   case playerSelction == 'ROCK' && computerSelection == 'SCISSORS':
+                        return ('You win! '+ playerSelction + ' beats ' + computerSelection);
+                        break;
+                   case playerSelction =='PAPER' && computerSelection == 'ROCK':
+                         return ('you win! ' + playerSelction + ' beats ' + computerSelection);
+                         break;
+                    case playerSelction == 'SCISSORS' && computerSelection == 'PAPER':
+                         return ('you win! ' + playerSelction + ' beats ' + computerSelection);
+                         break; 
+                    case playerSelction == computerSelection:
+                        return ('TIE')
+                        break;
+                    default:
+                        return ('You lose! ' + computerSelection + ' beats ' + playerSelction);
+               }
+
+            }
+             
+            
+            const playerChoice = prompt("Choose Rock, Paper, or Scissors").toUpperCase();
+            const computerChoice = computerPlay();
+
+
+            console.log(playRound(playerChoice,computerChoice));
+            
+
+
+        </script>
+    </body>
+</html>
