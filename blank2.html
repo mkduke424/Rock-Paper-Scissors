@@ -6,12 +6,20 @@
     </head>
 
     <body>
+        <button id="ROCK">Rock</button>
+        <button id="PAPER">Paper</button>
+        <button id="SCISSORS">Scissors</button>
+
+        <div id= "res">Result</div>
+        <div id="tally">Game Tally</div>
+
         <script>
+
             function computerPlay() {
                 let computerArray = ['ROCK' , 'PAPER', 'SCISSORS'];
                 return computerArray[Math.floor(Math.random() * computerArray.length)];
             }
-
+             
             function playRound(playerSelction,computerSelection) {
                
                switch (true) {
@@ -31,42 +39,47 @@
                         return ('You lose! ' + computerSelection + ' beats ' + playerSelction);
                }
             }
-
-               function game() {
-                   let userTally = 0;
-                   let compTally = 0;
-                   let result;
-                   for(let i = 0; i < 5; i++){
-                    let playerChoice = prompt("Choose Rock, Paper, or Scissors").toUpperCase();
-                    let computerChoice = computerPlay();
-                        result = playRound(playerChoice, computerChoice);
-                       if (result.search('win') >= 0){
-                       userTally ++;
-                        }
-                       else if (result.search('TIE') >= 0){
-                        compTally ++;
-                        userTally++;
-                       }
-                       else{
-                        compTally++;
-                       }
-                   }
-                  return gameWinner(userTally,compTally);
-               }
-
                function gameWinner(player1,player2) {
                 return (player1 > player2) ? 'You WON!! Your score: ' + player1 +  ' Computer score: '+ player2  : 
                   (player1 == player2) ? 'TIE!! Your score: ' + player1 + ' Computer score: ' + player2 : 
                   'You Lose!! Your score: ' + player1 + ' Computer score: ' + player2;
-               }            
+               }
+
+    
+               
+                   let userTally = 0;
+                   let compTally = 0;
+                   let divRes = document.getElementById('res');
+                   let divTal = document.getElementById('tally');
+
+               
+                    const buttons = document.querySelectorAll('button');
+                    buttons.forEach((button) => {
+                        button.addEventListener('click', () => {
+                            divRes.innerHTML = playRound(button.id,computerPlay());
+                            if (divRes.innerHTML.search('win') >= 0){
+                            userTally ++;
+                            }
+                            else if (divRes.innerHTML.search('TIE') >= 0){
+                            compTally ++;
+                            userTally++;
+                            }
+                            else{
+                            compTally++;
+                            }
+
+                  divTal.innerHTML = "Your score:" + userTally +", Computer score: " + compTally ;
+                  if(compTally == 5 || userTally ==5){
+                      divTal.innerHTML = alert(gameWinner(userTally,compTally));
+                  }
+                   })
+               })
+               
             
-           
-
-
-            console.log(game());
-            
-
-
+                
+                  //return gameWinner(userTally,compTally);
+               
+               
         </script>
     </body>
 </html>
